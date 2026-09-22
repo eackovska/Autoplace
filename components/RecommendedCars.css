@@ -1,0 +1,149 @@
+.recommended {
+  padding: 4rem 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.recommended-title {
+  text-align: center;
+  color: #d71920;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin: 0 0 2.5rem;
+}
+
+.recommended-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  z-index: 2;
+}
+
+.carousel-arrow svg {
+  width: 22px;
+  height: 22px;
+  color: #222;
+}
+
+.carousel-arrow:hover {
+  background: #d64545;
+  border-color: #d64545;
+  box-shadow: 0 6px 18px rgba(214, 69, 69, 0.3);
+}
+
+.carousel-arrow:hover svg {
+  color: #fff;
+}
+
+.carousel-arrow:active {
+  transform: scale(0.94);
+}
+
+.carousel-arrow-left {
+  margin-right: 1rem;
+}
+
+.carousel-arrow-right {
+  margin-left: 1rem;
+}
+
+.recommended-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.5rem 0.25rem;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.recommended-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.car-card {
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: start;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.car-card:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.car-card-image {
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.car-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.car-card-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.car-card-body h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  color: #1a1a1a;
+}
+
+.car-card-meta {
+  color: #777;
+  font-size: 0.88rem;
+  margin: 0 0 0.6rem;
+}
+
+.car-card-price {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .recommended {
+    padding: 2.5rem 1.25rem;
+  }
+  .recommended-title {
+    font-size: 1.6rem;
+  }
+  .carousel-arrow {
+    width: 42px;
+    height: 42px;
+  }
+  .car-card {
+    width: 230px;
+  }
+}

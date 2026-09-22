@@ -1,0 +1,165 @@
+.car-detail {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 6% 3.5rem;
+}
+
+.car-detail-top {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 3.9rem;
+}
+
+.gallery-main {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #161616;
+}
+
+.gallery-main img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gallery-thumbnails {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+}
+
+.gallery-thumbnail {
+  flex-shrink: 0;
+  width: 64px;
+  height: 48px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: #161616;
+  opacity: 0.6;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.gallery-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-thumbnail:hover {
+  opacity: 0.9;
+}
+
+.gallery-thumbnail-active {
+  border-color: #d71920;
+  opacity: 1;
+}
+
+.car-detail-info {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 1.5rem 1.6rem;
+}
+
+.car-detail-info h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.25;
+}
+
+.car-detail-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d71920;
+  margin-bottom: 1.4rem;
+}
+
+.car-detail-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.25rem;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid #222;
+}
+
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.spec-label {
+  color: #888;
+  font-size: 0.78rem;
+}
+
+.spec-value {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.car-detail-c {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.car-detail-back {
+  display: inline-block;
+  margin-top: 1.75rem;
+  color: #999;
+  font-size: 0.88rem;
+  transition: color 0.2s;
+}
+
+.car-detail-back:hover {
+  color: #fff;
+}
+
+.car-detail-notfound {
+  max-width: 600px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.car-detail-notfound h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.car-detail-notfound p {
+  color: #999;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 800px) {
+  .car-detail-top {
+    grid-template-columns: 1fr;
+  }
+  .gallery-main {
+    height: 260px;
+  }
+  .car-detail-info {
+    padding: 1.25rem;
+  }
+}
