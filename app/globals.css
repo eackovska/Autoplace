@@ -19,7 +19,12 @@ a{
   color: inherit;
 }
 
+button, input, select, textarea { font-family: inherit; }
+
 .navbar{
+  position: sticky;
+  top: 0;
+  z-index: 100;
   height: 80px;
   width: 100%;
   padding: 0 7%;
@@ -68,6 +73,8 @@ a{
 
 .nav-button{
   background: #d71920;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   padding: 12px 20px;
   border-radius: 6px;
   font-size: 14px;
@@ -79,58 +86,128 @@ a{
   background: #901015 !important;
 }
 
-.hero{
+.hero {
+  position: relative;
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   padding: 80px 7%;
-  background: 
-  linear-gradient(
-    90deg,
-    rgba(0,0,0,0.95) 0%,
-    rgba(0,0,0,0.75) 45%,
-    rgba(0,0,0,0.25) 100%
-  ),
-  url("/hero-car.jpg") center / cover
+  background: #d71920;
+  overflow: hidden;
 }
 
-.hero-content{
-  max-width: 700px;
+.hero-diagonal {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0b0b0b 100%);
+  clip-path: polygon(0 0, 62% 0, 46% 100%, 0 100%);
 }
 
-.hero-small{
-  color: #d71920;
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
+.hero-car-img {
+  position: absolute;
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 125%;
+  max-height: 760px;
+  width: auto;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-car-glow {
+  position: absolute;
+  right: 6%;
+  bottom: 6%;
+  width: 46%;
+  max-width: 480px;
+  aspect-ratio: 3 / 1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(215, 25, 32, 0.35) 0%,
+    rgba(215, 25, 32, 0.12) 45%,
+    transparent 75%
+  );
+  filter: blur(18px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-small {
+  color: #fff;
+  opacity: 0.85;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
 }
 
-.hero h1{
-  font-size: clamp(45px, 6vw, 78px);
-  line-height: 1.05;
-  margin-bottom: 25px;
+.hero h1 {
+  font-size: clamp(42px, 5.5vw, 68px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 22px;
 }
 
-.hero h1 span{
+.hero h1 span {
   color: #d71920;
+  -webkit-text-stroke: 1px rgba(98, 14, 14, 0.4);
 }
 
-.hero-text{
-  color: #c5c5c5;
-  font-size: 18px;
+.hero-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
   line-height: 1.7;
-  max-width: 600px;
-  margin-bottom: 35px;
+  max-width: 420px;
+  margin-bottom: 32px;
 }
 
-.hero-buttons{
+.hero-buttons {
   display: flex;
   gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-buttons .primary-button {
+  background: #d71920;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  padding: 16px 32px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-buttons .primary-button:hover {
+  background: #901015;
+}
+
+@media (max-width: 900px) {
+  .hero-car-img {
+    display: none;
+  }
+  .hero-diagonal {
+    clip-path: none;
+    background: linear-gradient(180deg,  #1a1a1a 0%, #0b0b0b 100%);
+  }
 }
 
 .primary-button{
   background: #d71920;
+  text-transform: uppercase;
   padding: 15px 25px;
   border-radius: 6px;
   font-size: 14px;
@@ -139,6 +216,43 @@ a{
 }
 
 .primary-button:hover{
-  background: #901015 ;
+  background: #901015;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-switch a {
+  display: inline-block;
+  line-height: 0;
+  opacity: 0.45;
+  filter: grayscale(70%);
+  transition: opacity 0.2s, filter 0.2s, transform 0.2s;
+}
+
+.lang-switch a img {
+  width: 24px;
+  height: auto;
+  border-radius: 3px;
+  display: block;
+}
+
+.lang-switch a:hover {
+  opacity: 0.8;
+}
+
+.lang-switch a.lang-active {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.15);
 }
 

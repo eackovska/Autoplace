@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { translateCarText, type Locale } from "@/lib/CarTerms";
 import "./RecommendedCars.css";
 
 export type Car = {
@@ -18,7 +19,15 @@ function format(number: number): string {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-export default function RecommendedCars({ car }: { car: Car[] }) {
+export default function RecommendedCars({
+  car,
+  title,
+  locale,
+}: {
+  car: Car[];
+  title: string;
+  locale: Locale;
+}) {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const move = (direction: "left" | "right") => {
@@ -53,7 +62,7 @@ export default function RecommendedCars({ car }: { car: Car[] }) {
 
   return (
     <section className="recommended">
-      <h2 className="recommended-title">Препорачано за вас</h2>
+      <h2 className="recommended-title">{title}</h2>
 
       <div className="recommended-wrapper">
         <button
@@ -87,7 +96,7 @@ export default function RecommendedCars({ car }: { car: Car[] }) {
                   {c.brand} {c.model}
                 </h3>
                 <p className="car-card-meta">
-                  {c.year} · {format(c.kilometers)} km · {c.fuel}
+                  {c.year} · {format(c.kilometers)} km · {translateCarText(c.fuel, locale)}
                 </p>
                 <p className="car-card-price">{format(c.price)} €</p>
               </div>

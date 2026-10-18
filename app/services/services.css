@@ -1,0 +1,57 @@
+.services-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 6% 3.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.service-card {
+  flex: 1 1 280px;
+  max-width: 320px;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+
+.service-icon-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin: 0 auto 1.1rem;
+  display: block;
+}
+
+.service-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+
+.service-card p {
+  color: #999;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.services-cta {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 6% 4rem;
+  text-align: center;
+}
+
+.services-cta h2 {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 800px) {
+  .service-card {
+    flex-basis: 100%;
+    max-width: 400px;
+  }
+}

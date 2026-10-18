@@ -1,8 +1,10 @@
 import { supabase }  from "@/lib/supabase";
 import RecommendedCars, { type Car } from "@/components/RecommendedCars"; 
-import Link from "next/link";
+import { getDictionary } from "@/lib/i18n";
 
 export default async function Home() {
+  const { t, locale } = await getDictionary();
+
   const { data, error} = await supabase 
   .from("cars")
   .select("id, brand, model, year, price, kilometers, fuel, car_images(image_url, is_main)")
@@ -13,6 +15,8 @@ export default async function Home() {
   if(error){
     console.error("Грешка при вчитување автомобил",  error.message);
   }
+
+  const h = t.hero;
 
   const car: Car[] = (data ?? []).map((c) => {
     const images = (c as unknown as {
@@ -39,18 +43,22 @@ export default async function Home() {
   return (
     <main>
       <section className="hero">
-        <div  className="hero-content">
-          <p className="hero-small">НАЈДЕТЕ ГО ВАШИОТ СОВРШЕН АВТОМОБИЛ</p>
-          <h1>Проверени возила.<br/><span>Најдобри цени.</span></h1>
+        <div  className="hero-diagonal"/>
+        <div className="hero-content">
+          <p className="hero-small">{h.small}</p>
+          <h1>{h.title1}<br/><span>{h.title2}</span></h1>
 
-          <p className="hero-text">Голем избор на квалитетни половни автомобили по најдобри цени. Безбедно, брзо и лесно!</p>
+          <p className="hero-text">{h.text}</p>
 
           <div className="hero-buttons">
-            <a href="/cars" className="primary-button">Прегледај возила</a>
+            <a href="/cars" className="primary-button">{h.cta}</a>
           </div>
         </div>
+
+        <div className="hero-car-glow"/>
+        <img src="/hero-image.png" alt="" className="hero-car-img"/>
       </section>
-      <RecommendedCars car={car}></RecommendedCars>
+      <RecommendedCars car={car} title={t.recommended.title} locale={locale}/>
     </main>
   );
 }

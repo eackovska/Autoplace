@@ -1,0 +1,106 @@
+.page-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  padding: 5rem 7%;
+  text-align: center;
+  overflow: hidden;
+  background-color: #0b0b0b;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(11, 11, 11, 0.55) 0%,
+      rgba(11, 11, 11, 0.82) 100%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 50% 0%,
+      rgba(215, 25, 32, 0.35),
+      transparent 70%
+    );
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.page-hero-bar {
+  display: block;
+  width: 56px;
+  height: 5px;
+  margin: 0 auto 1.5rem;
+  background: #d71920;
+  border-radius: 3px;
+}
+
+.page-hero-title {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.05;
+  color: #fff;
+  -webkit-text-stroke: 2px #d71920;
+  paint-order: stroke fill;
+  margin: 0 0 1rem;
+}
+
+.page-hero-subtitle {
+  max-width: 640px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.about-story-text h2,
+.about-team h2,
+.about-cta h2,
+.services-cta h2,
+.contact-form-card h2,
+.contact-details h2 {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+.about-story-text h2::before,
+.about-team h2::before,
+.about-cta h2::before,
+.services-cta h2::before,
+.contact-form-card h2::before,
+.contact-details h2::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 4px;
+  margin-bottom: 0.9rem;
+  background: #d71920;
+  border-radius: 2px;
+}
+
+.about-team h2::before,
+.about-cta h2::before,
+.services-cta h2::before {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 700px) {
+  .page-hero {
+    min-height: 300px;
+    padding: 3.5rem 6%;
+  }
+  .page-hero-title {
+    -webkit-text-stroke-width: 1.5px;
+  }
+}

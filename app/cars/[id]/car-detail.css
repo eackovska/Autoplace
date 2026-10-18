@@ -14,7 +14,9 @@
 .gallery {
   display: flex;
   flex-direction: column;
-  gap: 3.9rem;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  min-height: 550px;
 }
 
 .gallery-main {
@@ -37,8 +39,9 @@
 .gallery-thumbnails {
   display: flex;
   gap: 0.5rem;
-  overflow-x: auto;
+  flex-wrap: wrap;
   padding-bottom: 0.2rem;
+  min-height: 48px;
 }
 
 .gallery-thumbnail {
@@ -76,12 +79,21 @@
   border: 1px solid #222;
   border-radius: 14px;
   padding: 1.5rem 1.6rem;
+  margin-top: 1.5rem;
+  min-height: 550px;
+  display: flex;
+  flex-direction: column;
 }
 
 .car-detail-info h1 {
   font-size: 1.6rem;
   margin-bottom: 0.3rem;
   line-height: 1.25;
+  min-height: 2.5em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .car-detail-price {
@@ -121,6 +133,7 @@
   display: block;
   text-align: center;
   width: 100%;
+  margin-top: auto;
 }
 
 .car-detail-back {
@@ -156,10 +169,15 @@
   .car-detail-top {
     grid-template-columns: 1fr;
   }
+  .gallery {
+    min-height: auto;
+  }
   .gallery-main {
     height: 260px;
   }
   .car-detail-info {
     padding: 1.25rem;
+    min-height: auto;
+    margin-top: 0;
   }
 }

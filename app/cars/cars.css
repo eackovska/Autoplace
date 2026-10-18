@@ -9,7 +9,9 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin: 0 0 0.4rem;
-  color: #d64545;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d71920;
 }
 
 .cars-page-header p {
@@ -22,8 +24,6 @@
   margin: 0 auto;
   padding: 0 2rem 4rem;
 }
-
-/* ---- Филтри ---- */
 
 .cars-filters-wrapper {
   max-width: 1300px;
@@ -61,8 +61,15 @@
   min-width: 180px;
 }
 
-.cars-filters input[type="number"] {
-  width: 110px;
+.filter-range-row {
+  flex-basis: 100%;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.filter-range-row select {
+  width: 120px;
 }
 
 .filter-submit {
@@ -72,7 +79,6 @@
   border-radius: 6px;
   padding: 0.6rem 1.3rem;
   font-size: 0.88rem;
-  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -82,14 +88,18 @@
 }
 
 .filter-clear {
-  color: #999;
-  font-size: 0.85rem;
-  text-decoration: underline;
-  white-space: nowrap;
+  background: #d71920;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.3rem;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
 .filter-clear:hover {
-  color: #fff;
+  background: #901015;
 }
 
 .filter-sort {
@@ -104,7 +114,7 @@
     flex-direction: column;
     align-items: stretch;
   }
-  .cars-filters input[type="number"] {
+  .filter-range-row select {
     width: 100%;
   }
 }
@@ -120,8 +130,6 @@
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
 }
-
-/* ---- Картичка на автомобил (self-contained, не зависи од друг CSS) ---- */
 
 .grid-card {
   display: block;

@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
+import { getDictionary } from "@/lib/i18n";
+import { translateCarText } from "@/lib/CarTerms";
 import "./cars.css";
-import Link from "next/link";
 
 type Car = {
     id: number;
@@ -28,7 +29,8 @@ export default async function CarsPage({
     searchParams: Promise<SearchParams>;
 }) {
     const params = await searchParams;
-
+    const { t, locale } = await getDictionary();
+    const cp = t.carsPage;
     const search = typeof params.search == "string" ? params.search : "";
     const brand = typeof params.brand == "string" ? params.brand : "";
     const fuel = typeof params.fuel == "string" ? params.fuel : "";
@@ -48,6 +50,13 @@ export default async function CarsPage({
     const fuels = [...new Set((allCars ?? []).map((c) => c.fuel))].sort();
     const gearboxes = [...new Set((allCars ?? []).map((c) => c.gearbox))].sort();
 
+    const priceOptions = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
+    const currentYear = new Date().getFullYear();
+    const yearOptions = Array.from(
+        { length: currentYear - 1999 },
+        (_, i) => currentYear - i
+    );
+    
     let query = supabase
         .from("cars")
         .select("id, brand, model, year, price, kilometers, fuel, car_images(image_url,is_main)")
@@ -110,16 +119,16 @@ export default async function CarsPage({
     return (
         <main>
             <section className="cars-page-header">
-                <h1>Достапни автомобили</h1>
-                <p>{cars.length} автомобили се моментално достапни</p>
+                <h1>{cp.title}</h1>
+                <p>{cp.available(cars.length)}</p>
             </section>
 
             <section className="cars-filters-wrapper">
                 <form method="get" className="cars-filters">
-                    <input type="text" name="search" placeholder="Пребарај марка или модел..." defaultValue={search} className="filter-search"/>
+                    <input type="text" name="search" placeholder={cp.search} defaultValue={search} className="filter-search"/>
                     
                     <select name="brand" defaultValue={brand}>
-                        <option value="">Сите марки</option>
+                        <option value="">{cp.allBrands}</option>
                             {brands.map((b) => (
                                 <option key={b} value={b}>
                                     {b}
@@ -128,42 +137,75 @@ export default async function CarsPage({
                     </select>
 
                     <select name="fuel" defaultValue={fuel}>
-                        <option value="">Сите горива</option>
+                        <option value="">{cp.allFuels}</option>
                             {fuels.map((f) => (
                                 <option key={f} value={f}>
-                                    {f}
+                                    {translateCarText(f, locale)}
                                 </option>
                             ))}
                     </select>
 
                     <select name="gearbox" defaultValue={gearbox}>
-                        <option value="">Сите менувачи</option>
+                        <option value="">{cp.allGearBoxes}</option>
                             {gearboxes.map((g) => (
                                 <option key={g} value={g}>
-                                    {g}
+                                    {translateCarText(g, locale)}
                                 </option>
                             ))}
                     </select>
 
-                    <input type="number" name="minPrice" placeholder="Цена од (€)" defaultValue={minPrice ?? ""}/>
-                    <input type="number" name="maxPrice" placeholder="Цена до (€)" defaultValue={maxPrice ?? ""}/>
-                    <input type="number" name="minYear" placeholder="Година од" defaultValue={minYear ?? ""}/>
-                    <input type="number" name="maxYear" placeholder="Година до" defaultValue={maxYear ?? ""}/>
+                    <div className="filter-range-row">
+                        <select name="minPrice" defaultValue={minPrice ?? ""}>
+                            <option value="">{cp.priceFrom}</option>
+                            {priceOptions.map((p) => (
+                                <option key={p} value={p}>
+                                    {format(p)} €
+                                </option>
+                            ))}
+                        </select>
+                        
+                        <select name="maxPrice" defaultValue={maxPrice ?? ""}>
+                            <option value="">{cp.priceTo}</option>
+                            {priceOptions.map((p) => (
+                                <option key={p} value={p}>
+                                    {format(p)} €
+                                </option>
+                            ))}
+                        </select>
+                        
+                        <select name="minYear" defaultValue={minYear ?? ""}>
+                            <option value="">{cp.yearFrom}</option>
+                            {yearOptions.map((y) => (
+                                <option key={y} value={y}>
+                                    {y}
+                                </option>
+                            ))}
+                        </select>
 
-                    <button type="submit" className="filter-submit">Пребрај</button>
+                        <select name="maxYear" defaultValue={maxYear ?? ""}>
+                            <option value="">{cp.yearTo}</option>
+                            {yearOptions.map((y) => (
+                                <option key={y} value={y}>
+                                    {y}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <button type="submit" className="filter-submit">{cp.submit}</button>
 
                     <select name="sort" defaultValue={sort} className="filter-sort">
-                        <option value="newest">Најново прво</option>
-                        <option value="price_asc">Цена: Најниска прво</option>
-                        <option value="price_desc">Цена: Највисока прво</option>
-                        <option value="year_desc">Година: Најнова прво</option>
-                        <option value="year_asc">Година: Најстара прво</option>
-                        <option value="km_asc">Најмалку километри</option>
+                        <option value="newest">{cp.sortNewest}</option>
+                        <option value="price_asc">{cp.sortPriceAsc}</option>
+                        <option value="price_desc">{cp.sortPriceDesc}</option>
+                        <option value="year_desc">{cp.sortYearDesc}</option>
+                        <option value="year_asc">{cp.sortYearAsc}</option>
+                        <option value="km_asc">{cp.sortKmAsc}</option>
                     </select>
 
                     {hasActiveFilters && (
                         <a href="/cars" className="filter-clear">
-                            Исчисти филтри
+                            {cp.clear}
                         </a>
                     )}
                 </form>
@@ -171,7 +213,7 @@ export default async function CarsPage({
 
             <section className="cars-grid-wrapper">
                 {cars.length == 0 ? (
-                    <p className="cars-empty">Нема автомобили што се совпаѓаат со твоето пребарување.</p>
+                    <p className="cars-empty">{cp.empty}</p>
                  ) : (
                     <div className="cars-grid">
                         {cars.map((c) => (
@@ -184,7 +226,7 @@ export default async function CarsPage({
                                         {c.brand} {c.model}
                                     </h3>
                                     <p className="grid-card-meta">
-                                        {c.year} · {format(c.kilometers)} km · {c.fuel}
+                                        {c.year} · {format(c.kilometers)} km · {translateCarText(c.fuel, locale)}
                                     </p>
                                     <p className="grid-card-price">
                                         {format(c.price)} €
